@@ -39,8 +39,12 @@ class ItemStore {
           maxScore: last_item ? last_item.score : null,
         };
 
-        console.log(this.state);
-        this.view.changedState();
+        if (this.view.state.isLoading) {
+          this.view.setState({
+            isLoading: false,
+            item: this.nextItem()
+          });
+        }
       })
       .done();
 
