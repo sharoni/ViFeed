@@ -4,10 +4,12 @@ var React = require('react-native');
 
 var {
   Text,
+  Image,
   TouchableHighlight
 } = React;
 
 var FavouriteButton = React.createClass({
+
   handleClick: function(event) {
     this.props.itemStore.nextItem();
   },
