@@ -30,14 +30,19 @@ var ItemView = React.createClass({
   },
 
   render: function() {
-    console.log(this.state);
-    var imageUrl = this.state.item ? this.state.item.photos[0].url : false
+    var imageUrl = false;
+    var itemTitle = false;
+
+    if (this.state.item) {
+      imageUrl = this.state.item.photos[0].url
+      itemTitle = this.state.item.title;
+    }
 
     return(
       <View style={styles.box}>
         <ItemImage source={imageUrl}/>
-        <ItemTitle/>
-        <ItemActions itemId={this.itemId}/>
+        <ItemTitle title={itemTitle}/>
+        <ItemActions itemStore={this.store}/>
       </View>
     );
   }

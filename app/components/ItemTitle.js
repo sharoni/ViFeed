@@ -8,10 +8,10 @@ var {
 
 var ItemTitle = React.createClass({
   render: function() {
-    var text = 'get item title here';
+    var title = this.props.title ? this.props.title : '';
 
     return (
-      <Text>{text}</Text>
+      <Text>{title}</Text>
     );
   }
 });
