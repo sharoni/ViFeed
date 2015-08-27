@@ -1,33 +1,53 @@
 'use strict';
 
 var React = require('react-native');
+var Dimensions = require('Dimensions');
+var {width, height} = Dimensions.get('window');
+
 
 var {
   StyleSheet,
   Text,
-  Image
+  Image,
+  View
 } = React;
 
 var ItemImage = React.createClass({
   render: function() {
-    var image;
+    var output;
 
     if(this.props.source) {
-      image = <Image
+      output = <Image
         source={{uri: this.props.source}}
         style={styles.image} />
     } else {
-      image = <Text>No image</Text>
+      output =
+      <View style={styles.loading}>
+        <Text>Loading...</Text>
+      </View>
     }
 
-    return image;
+    return (
+      <View style={styles.wrapper}>
+        {output}
+      </View>
+    );
   }
 });
 
 var styles = StyleSheet.create({
+  loading: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  wrapper: {
+    width: width,
+    height: 420
+  },
   image: {
-    width: 300,
-    height: 400,
+    flex: 1,
+    resizeMode: 'cover',
     backgroundColor: '#ccc'
   }
 });
