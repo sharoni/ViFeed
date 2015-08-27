@@ -2,7 +2,7 @@
   "name": "React",
   "version": "0.9.0",
   "summary": "Build high quality mobile apps using React.",
-  "description": "                            React Native apps are built using the React JS\n                            framework, and render directly to native UIKit\n                            elements using a fully asynchronous architecture.\n                            There is no browser and no HTML. We have picked what\n                            we think is the best set of features from these and\n                            other technologies to build what we hope to become\n                            the best product development framework available,\n                            with an emphasis on iteration speed, developer\n                            delight, continuity of technology, and absolutely\n                            beautiful and fast products with no compromises in\n                            quality or capability.\n",
+  "description": "React Native apps are built using the React JS\nframework, and render directly to native UIKit\nelements using a fully asynchronous architecture.\nThere is no browser and no HTML. We have picked what\nwe think is the best set of features from these and\nother technologies to build what we hope to become\nthe best product development framework available,\nwith an emphasis on iteration speed, developer\ndelight, continuity of technology, and absolutely\nbeautiful and fast products with no compromises in\nquality or capability.",
   "homepage": "http://facebook.github.io/react-native/",
   "license": "BSD",
   "authors": "Facebook",

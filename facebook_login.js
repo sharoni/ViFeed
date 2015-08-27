@@ -16,7 +16,6 @@ var FacebookLogin = React.createClass({
   render: function() {
     return (
       <View style={this.props.style}>
-			<Text>asdasd</Text>
         <FBSDKLoginButton
           style={styles.loginButton}
           onLoginFinished={(error, result) => {
