@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "55B4D54D3766D836E849A52C"
+               BlueprintIdentifier = "88B127D75DFFFCF99AA2F8C8"
                BuildableName = "libReact.a"
                BlueprintName = "React"
                ReferencedContainer = "container:Pods.xcodeproj">

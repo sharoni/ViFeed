@@ -6,7 +6,8 @@ var {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  TouchableHighlight
 } = React;
 
 
@@ -24,6 +25,7 @@ var ItemView = React.createClass({
   },
 
   initialize: function() {
+    console.log('ItemView initialized');
   },
 
   render: function() {
@@ -34,7 +36,7 @@ var ItemView = React.createClass({
           style={styles.image}
         />
         <ItemTitle/>
-        <ItemActions/>
+        <ItemActions itemId={this.itemId}/>
       </View>
     );
   }
@@ -54,8 +56,8 @@ var ItemActions = React.createClass({
   render: function() {
     return (
       <View>
-        <FavouriteButton/>
-        <SkipButton/>
+        <FavouriteButton itemId={this.props.itemId} />
+        <SkipButton itemId={this.props.itemId} />
       </View>
     );
   }
@@ -63,26 +65,33 @@ var ItemActions = React.createClass({
 
 
 var FavouriteButton = React.createClass({
+  handleClick: function() {
+    console.log('favourite clicked');
+  },
+
   render: function() {
     var text = 'favourite button';
 
     return (
-      <Text>{text}</Text>
+      <TouchableHighlight onPress={this.handleClick}>
+          <Text>{text}</Text>
+      </TouchableHighlight>
     );
   }
 });
 
 var SkipButton = React.createClass({
-  skipItem: function() {
-    console.log('aa');
+  handleClick: function(event) {
+    console.log('skip clicked');
   },
 
   render: function() {
     var text = 'skip button';
 
     return (
-      <Text onClick={this.skipItem}>{text}</Text>
-      <Text>{text}</Text>
+       <TouchableHighlight onPress={this.handleClick}>
+          <Text>{text}</Text>
+      </TouchableHighlight>
     );
   }
 });

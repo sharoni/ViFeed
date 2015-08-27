@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "96AD428C16E5C98D4FD97504"
+               BlueprintIdentifier = "E0A1ADFD20931DD1EB17FFE7"
                BuildableName = "libreact-native-fbsdkshare.a"
                BlueprintName = "react-native-fbsdkshare"
                ReferencedContainer = "container:Pods.xcodeproj">
