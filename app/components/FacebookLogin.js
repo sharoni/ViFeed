@@ -1,5 +1,6 @@
 'use strict';
 
+var Configuration = require('../common/Configuration')
 var React = require('react-native');
 var {
   StyleSheet,
@@ -56,7 +57,11 @@ var FacebookLogin = React.createClass({
 					this.fetchPublicInfo()
 					FBSDKAccessToken.getCurrentAccessToken((token) => {
 						this.setState({accessToken: token.tokenString, appId: token.appID});
-						this.fetchApiToken()
+						this.fetchApiToken((error, apiToken) => {
+							if (apiToken) {
+								this.vintedLogin(this.state.accessToken, this.state.appId, apiToken)
+							}
+						});
 					});
 		    }
 		  }
@@ -87,7 +92,7 @@ var FacebookLogin = React.createClass({
 		request.send();
 	},
 
-	fetchApiToken: function() {
+	fetchApiToken: function(callback: (error: ?Object, apiToken: ?Object) => void) {
 		var request = new XMLHttpRequest();
 		request.onreadystatechange = (e) => {
 		  if (request.readyState !== 4) {
@@ -95,12 +100,13 @@ var FacebookLogin = React.createClass({
 		  }
 		  if (request.status === 200) {
 				var apiToken = JSON.parse(request.responseText).token
-				this.vintedLogin(this.state.accessToken, this.state.appId, apiToken)
+				console.log(request.responseText)
+				callback(null, apiToken)
 		  } else {
-		    console.warn(request);
+		    callback(request, null)
 		  }
 		};
-		var params = '?api_key=<API_KEY>'
+		var params = '?api_key=' + Configuration.get('VINTED_API_KEY')
 		var url = 'https://sandbox-us.vinted.net/api/1.2/get_token' + params
 		request.open('GET', url, true);
 		request.send();
