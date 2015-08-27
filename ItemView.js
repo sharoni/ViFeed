@@ -10,25 +10,37 @@ var {
   TouchableHighlight
 } = React;
 
-
+var ItemStore = require('./ItemStore');
 var ItemView = React.createClass({
   itemId: '100',
 
   getInitialState: function() {
     return {
-      isLoading: false
+      isLoading: true,
+      item: null,
     };
   },
 
   componentDidMount: function() {
-    this.initialize('');
+    this.store = new ItemStore(this);
+    this.store.nextItem();
   },
 
   initialize: function() {
     console.log('ItemView initialized');
   },
 
+  changedState: function(state) {
+    if (this.state.isLoading) {
+      this.setState({
+        isLoading: false,
+        item: this.store.nextItem(),
+      });
+    }
+  },
+
   render: function() {
+    console.log(this.state);
     return(
       <View style={styles.box}>
         <Image
