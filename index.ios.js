@@ -15,7 +15,9 @@ var FacebookLogin = require('./facebook_login');
 var ViFeed = React.createClass({
    render: function() {
     return (
-    	<FacebookLogin style={styles.loginContainer}/>
+			<View style={styles.loginContainer}>
+				<FacebookLogin/>
+			</View>
     );
   },
 });

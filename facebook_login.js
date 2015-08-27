@@ -4,6 +4,7 @@ var React = require('react-native');
 var {
   StyleSheet,
   View,
+	Text,
 } = React;
 
 var FBSDKLogin = require('react-native-fbsdklogin');
@@ -15,6 +16,7 @@ var FacebookLogin = React.createClass({
   render: function() {
     return (
       <View style={this.props.style}>
+			<Text>asdasd</Text>
         <FBSDKLoginButton
           style={styles.loginButton}
           onLoginFinished={(error, result) => {
