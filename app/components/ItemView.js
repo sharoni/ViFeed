@@ -11,6 +11,10 @@ var {
 } = React;
 
 var ItemStore = require('../stores/ItemStore');
+var ItemTitle = require('./ItemTitle');
+var ItemImage = require('./ItemImage');
+var ItemActions = require('./ItemActions');
+
 var ItemView = React.createClass({
   itemId: '100',
 
@@ -39,86 +43,11 @@ var ItemView = React.createClass({
   }
 });
 
-var ItemImage = React.createClass({
-  render: function() {
-    var image;
-
-    if(this.props.source) {
-      image = <Image
-        source={{uri: this.props.source}}
-        style={styles.image} />
-    } else {
-      image = <Text>No image</Text>
-    }
-
-    return image;
-  }
-});
-
-var ItemTitle = React.createClass({
-  render: function() {
-    var text = 'get item title here';
-
-    return (
-      <Text>{text}</Text>
-    );
-  }
-});
-
-var ItemActions = React.createClass({
-  render: function() {
-    return (
-      <View>
-        <FavouriteButton itemId={this.props.itemId} />
-        <SkipButton itemId={this.props.itemId} />
-      </View>
-    );
-  }
-});
-
-
-var FavouriteButton = React.createClass({
-  handleClick: function() {
-    console.log('favourite clicked');
-  },
-
-  render: function() {
-    var text = 'favourite button';
-
-    return (
-      <TouchableHighlight onPress={this.handleClick}>
-          <Text>{text}</Text>
-      </TouchableHighlight>
-    );
-  }
-});
-
-var SkipButton = React.createClass({
-  handleClick: function(event) {
-    console.log('skip clicked');
-  },
-
-  render: function() {
-    var text = 'skip button';
-
-    return (
-       <TouchableHighlight onPress={this.handleClick}>
-          <Text>{text}</Text>
-      </TouchableHighlight>
-    );
-  }
-});
-
 var styles = StyleSheet.create({
   box: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  image: {
-    width: 300,
-    height: 400,
-    backgroundColor: '#ccc'
   }
 });
 
