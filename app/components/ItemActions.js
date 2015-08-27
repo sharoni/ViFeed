@@ -12,8 +12,8 @@ var ItemActions = React.createClass({
   render: function() {
     return (
       <View>
-        <FavouriteButton />
-        <SkipButton />
+        <FavouriteButton itemStore={this.props.itemStore}/>
+        <SkipButton itemStore={this.props.itemStore}/>
       </View>
     );
   }

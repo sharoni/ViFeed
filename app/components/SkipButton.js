@@ -9,7 +9,7 @@ var {
 
 var SkipButton = React.createClass({
   handleClick: function(event) {
-    console.log('skip clicked');
+    this.props.itemStore.nextItem();
   },
 
   render: function() {

@@ -18,11 +18,15 @@ class ItemStore {
     }
 
     this.state.records = records;
+
+    this.view.setState({ item: item });
     return item;
   }
 
   _fetchNextPage() {
     const {records, maxScore} = this.state;
+
+    this.view.setState({isLoading: true });
 
     fetch(this._requestUrl(), {
       headers: {

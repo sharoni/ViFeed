@@ -8,8 +8,8 @@ var {
 } = React;
 
 var FavouriteButton = React.createClass({
-  handleClick: function() {
-    console.log('favourite clicked');
+  handleClick: function(event) {
+    this.props.itemStore.nextItem();
   },
 
   render: function() {
