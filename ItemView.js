@@ -26,31 +26,33 @@ var ItemView = React.createClass({
     this.store.nextItem();
   },
 
-  initialize: function() {
-    console.log('ItemView initialized');
-  },
-
-  changedState: function(state) {
-    if (this.state.isLoading) {
-      this.setState({
-        isLoading: false,
-        item: this.store.nextItem(),
-      });
-    }
-  },
-
   render: function() {
     console.log(this.state);
+    var imageUrl = this.state.item ? this.state.item.photos[0].url : false
+
     return(
       <View style={styles.box}>
-        <Image
-          source={{uri: 'https://s11-lt.vinted.net/images/item_photos/048/072/381/183270840.jpeg?1440648362'}}
-          style={styles.image}
-        />
+        <ItemImage source={imageUrl}/>
         <ItemTitle/>
         <ItemActions itemId={this.itemId}/>
       </View>
     );
+  }
+});
+
+var ItemImage = React.createClass({
+  render: function() {
+    var image;
+
+    if(this.props.source) {
+      image = <Image
+        source={{uri: this.props.source}}
+        style={styles.image} />
+    } else {
+      image = <Text>No image</Text>
+    }
+
+    return image;
   }
 });
 
