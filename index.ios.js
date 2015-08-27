@@ -22,6 +22,7 @@ var ViFeed = React.createClass({
 				<FacebookLogin />
         <ItemView/>
 			</View>
+      <ItemView/>
     );
   },
 });

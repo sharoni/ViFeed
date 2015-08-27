@@ -42,7 +42,7 @@ var ItemView = React.createClass({
 
 var ItemTitle = React.createClass({
   render: function() {
-    var text = 'get item title hereeee';
+    var text = 'get item title here';
 
     return (
       <Text>{text}</Text>
@@ -82,6 +82,7 @@ var SkipButton = React.createClass({
 
     return (
       <Text onClick={this.skipItem}>{text}</Text>
+      <Text>{text}</Text>
     );
   }
 });
