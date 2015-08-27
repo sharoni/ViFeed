@@ -1,6 +1,7 @@
 'use strict';
 
 var Configuration = require('../common/Configuration')
+var VintedAPI = require('./VintedAPI')
 var React = require('react-native');
 var {
   StyleSheet,
@@ -27,6 +28,7 @@ var FacebookLogin = React.createClass({
 			accessToken: null,
 			apiToken: null,
 			appId: null,
+			vintedAPI: new VintedAPI()
     };
   },
 
@@ -57,11 +59,7 @@ var FacebookLogin = React.createClass({
 					this.fetchPublicInfo()
 					FBSDKAccessToken.getCurrentAccessToken((token) => {
 						this.setState({accessToken: token.tokenString, appId: token.appID});
-						this.fetchApiToken((error, apiToken) => {
-							if (apiToken) {
-								this.vintedLogin(this.state.accessToken, this.state.appId, apiToken)
-							}
-						});
+						this.state.vintedAPI.vintedLogin(token.tokenString, token.appID);
 					});
 		    }
 		  }
@@ -71,46 +69,6 @@ var FacebookLogin = React.createClass({
 	logout: function() {
 		FBSDKLoginManager.logOut();
 		this.setState({loginText: 'login', loggedIn: false});
-	},
-
-	vintedLogin: function(accessToken, appId, apiToken) {
-		var request = new XMLHttpRequest();
-		request.onreadystatechange = (e) => {
-		  if (request.readyState !== 4) {
-		    return;
-		  }
-		  if (request.status === 200) {
-		    console.log('success', request.responseText);
-		  } else {
-		    console.warn(request);
-		  }
-		};
-		var params = '?fb_access_token=' + accessToken +'&fb_app_id=' + appId + '&token=' + apiToken
-		var url = 'https://sandbox-us.vinted.net/api/1.2/facebook_login' + params
-		console.log(url)
-		request.open('GET', url, true);
-		request.send();
-	},
-
-	fetchApiToken: function(callback: (error: ?Object, apiToken: ?Object) => void) {
-		var request = new XMLHttpRequest();
-		request.onreadystatechange = (e) => {
-		  if (request.readyState !== 4) {
-		    return;
-		  }
-		  if (request.status === 200) {
-				var apiToken = JSON.parse(request.responseText).token
-				console.log(request.responseText)
-				callback(null, apiToken)
-		  } else {
-		    callback(request, null)
-		  }
-		};
-		var params = '?api_key=' + Configuration.get('VINTED_API_KEY')
-		var url = 'https://sandbox-us.vinted.net/api/1.2/get_token' + params
-		request.open('GET', url, true);
-		request.send();
-
 	},
 
 	fetchPublicInfo: function() {
