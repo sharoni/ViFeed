@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6B01E7EBA7BF999191973E8E"
+               BlueprintIdentifier = "11EB728D7B12E0E3814725A1"
                BuildableName = "libreact-native-fbsdklogin.a"
                BlueprintName = "react-native-fbsdklogin"
                ReferencedContainer = "container:Pods.xcodeproj">
