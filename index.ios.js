@@ -11,16 +11,16 @@ var {
   View,
 } = React;
 
-var FacebookLogin = require('./facebook_login');
 var ItemView = require('./ItemView');
 var styles = StyleSheet.create(require('./styles.js'));
+var FacebookLogin = require('./FacebookLogin');
 
 var ViFeed = React.createClass({
   render: function() {
     return (
 			<View style={styles.loginContainer}>
-				<FacebookLogin />
         <ItemView/>
+				<FacebookLogin />
 			</View>
     );
   },

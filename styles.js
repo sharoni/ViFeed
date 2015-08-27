@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = {
-  loginContainer: {
-    flex: 1,
+  facebook_login_button: {
     alignItems: 'center',
     justifyContent: 'center',
+		flex: 1,
   }
 };
