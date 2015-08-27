@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var ItemView = require('./ItemView');
 var {
   AppRegistry,
   Image,
@@ -11,18 +12,18 @@ var {
 } = React;
 
 var FacebookLogin = require('./facebook_login');
+var ItemView = require('./ItemView');
+var styles = StyleSheet.create(require('./styles.js'));
 
 var ViFeed = React.createClass({
-   render: function() {
+  render: function() {
     return (
 			<View style={styles.loginContainer}>
-				<FacebookLogin /> 
+				<FacebookLogin />
+        <ItemView/>
 			</View>
     );
   },
 });
-
-var styles = StyleSheet.create(require('./styles.js'));
-
 
 AppRegistry.registerComponent('ViFeed', () => ViFeed);
