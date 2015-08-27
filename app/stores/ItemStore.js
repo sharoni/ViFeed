@@ -7,6 +7,7 @@ class ItemStore {
       maxScore: null,
     };
     this.view = view;
+    this.nextItem();
   }
 
   nextItem() {

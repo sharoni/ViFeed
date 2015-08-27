@@ -10,7 +10,7 @@ var {
   TouchableHighlight
 } = React;
 
-var ItemStore = require('./ItemStore');
+var ItemStore = require('../stores/ItemStore');
 var ItemView = React.createClass({
   itemId: '100',
 
@@ -23,7 +23,6 @@ var ItemView = React.createClass({
 
   componentDidMount: function() {
     this.store = new ItemStore(this);
-    this.store.nextItem();
   },
 
   render: function() {

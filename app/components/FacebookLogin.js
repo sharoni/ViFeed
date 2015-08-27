@@ -28,7 +28,7 @@ var FacebookLogin = React.createClass({
 			appId: null,
     };
   },
-	
+
   render: function() {
     return (
 			<TouchableHighlight onPress={this.handleClick}>
@@ -36,7 +36,7 @@ var FacebookLogin = React.createClass({
       </TouchableHighlight>
     );
   },
-	
+
 	handleClick: function() {
 		if (this.state.loggedIn) {
 			this.logout()
@@ -44,15 +44,15 @@ var FacebookLogin = React.createClass({
 			this.login()
 		}
 	},
-	
+
 	login: function() {
 		FBSDKLoginManager.logInWithReadPermissions([], (error, result) => {
 		  if (error) {
 		    alert('Error logging in.');
 		  } else {
 		    if (result.isCanceled) {
-		      alert('Login cancelled.'); 
-		    } else {					
+		      alert('Login cancelled.');
+		    } else {
 					this.fetchPublicInfo()
 					FBSDKAccessToken.getCurrentAccessToken((token) => {
 						this.setState({accessToken: token.tokenString, appId: token.appID});
@@ -60,14 +60,14 @@ var FacebookLogin = React.createClass({
 					});
 		    }
 		  }
-		});	
+		});
 	},
-	
+
 	logout: function() {
 		FBSDKLoginManager.logOut();
 		this.setState({loginText: 'login', loggedIn: false});
 	},
-	
+
 	vintedLogin: function(accessToken, appId, apiToken) {
 		var request = new XMLHttpRequest();
 		request.onreadystatechange = (e) => {
@@ -86,7 +86,7 @@ var FacebookLogin = React.createClass({
 		request.open('GET', url, true);
 		request.send();
 	},
-	
+
 	fetchApiToken: function() {
 		var request = new XMLHttpRequest();
 		request.onreadystatechange = (e) => {
@@ -104,9 +104,9 @@ var FacebookLogin = React.createClass({
 		var url = 'https://sandbox-us.vinted.net/api/1.2/get_token' + params
 		request.open('GET', url, true);
 		request.send();
-		
+
 	},
-	
+
 	fetchPublicInfo: function() {
 		var fetchPublicInfo = new FBSDKGraphRequest((error, result) => {
 		  if (error) {
@@ -121,6 +121,12 @@ var FacebookLogin = React.createClass({
 	}
 });
 
-var styles = StyleSheet.create(require('./styles.js'));
+var styles = StyleSheet.create({
+  facebook_login_button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+		flex: 1,
+  }
+});
 
 module.exports = FacebookLogin;
