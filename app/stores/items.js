@@ -62,8 +62,7 @@ function _fetchItems(state) {
     })
     .done();
 
-    return new_state;
-  }
+  return new_state;
 }
 
 function _requestUrl(maxScore) {
