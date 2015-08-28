@@ -6,17 +6,19 @@ var React = require('react-native');
 
 class VintedAPI
 {
-	static vintedLogin(accessToken, appId) {
+	static vintedLogin(accessToken, appId, callback: (success: ?Object) => void) {
 		if (this.accessToken == null) {
 			this.fetchApiToken((error, apiToken) => {
-				this.handleLogin(accessToken, appId);
+				if (!error) {
+					this.handleLogin(accessToken, appId, callback);
+				}
 			});
 		} else {
-			this.handleLogin(accessToken, appId);
+			this.handleLogin(accessToken, appId, callback);
 		}
 	}
 
-	static handleLogin(accessToken, appId) {
+	static handleLogin(accessToken, appId, callback: (success: ?Object) => void) {
 		var request = new XMLHttpRequest();
 		request.onreadystatechange = (e) => {
 		  if (request.readyState !== 4) {
@@ -25,7 +27,9 @@ class VintedAPI
 		  if (request.status === 200) {
 		    console.log('success', request.responseText);
 				globalState.loggedIn = true;
+				callback(true);
 		  } else {
+				callback(false);
 		    console.warn(request);
 		  }
 		};

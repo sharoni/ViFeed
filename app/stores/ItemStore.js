@@ -29,6 +29,7 @@ class ItemStore {
 
     this.view.setState({isLoading: true });
 
+console.log(this._requestUrl())
     fetch(this._requestUrl(), {
       headers: {
         'Accept': 'application/json',
@@ -38,8 +39,8 @@ class ItemStore {
     })
       .then((response) => response.json())
       .then((responseData) => {
-        item_dtos = responseData.filter((item_dto) => item_dto.entity_type == 'item');
-        last_item = item_dtos[item_dtos.length-1];
+        item_dtos = responseData.feed_events.filter((item_dto) => item_dto.entity_type == 'item');
+				last_item = item_dtos[item_dtos.length-1];
 
         this.state = {
           records: records.concat(item_dtos.map((item_dto) => item_dto.entity)),
@@ -59,12 +60,13 @@ class ItemStore {
   }
 
   _requestUrl() {
+		const path = `${CONFIGURATION.vintedRootUrl}/api/v2/feed_events`; 
     const {maxScore} = this.state;
 
     if (maxScore) {
-      return `${CONFIGURATION.vintedRootUrl}/?max_score=${maxScore}`;
+      return `${path}?max_score=${maxScore}`;
     } else {
-      return `${CONFIGURATION.vintedRootUrl}`;
+      return path;
     }
   }
 };
