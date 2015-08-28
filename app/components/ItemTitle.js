@@ -12,7 +12,7 @@ var ItemTitle = React.createClass({
     var title = this.props.title ? this.props.title : '';
 
     return (
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title} numberOfLines={1}>{title}</Text>
     );
   }
 });
@@ -22,7 +22,7 @@ var styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     lineHeight: 30,
-    padding: 20
+    padding: 20,
   }
 });
 
