@@ -39,7 +39,9 @@ console.log(this._requestUrl())
     })
       .then((response) => response.json())
       .then((responseData) => {
-        item_dtos = responseData.feed_events.filter((item_dto) => item_dto.entity_type == 'item');
+        item_dtos = responseData.feed_events.filter(function(item_dto) {
+          return item_dto.entity_type == 'item' && item_dto.entity.photos[0];
+        });
 				last_item = item_dtos[item_dtos.length-1];
 
         this.state = {
@@ -60,7 +62,7 @@ console.log(this._requestUrl())
   }
 
   _requestUrl() {
-		const path = `${CONFIGURATION.vintedRootUrl}/api/v2/feed_events`; 
+		const path = `${CONFIGURATION.vintedRootUrl}/api/v2/feed_events`;
     const {maxScore} = this.state;
 
     if (maxScore) {
