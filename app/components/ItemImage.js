@@ -44,7 +44,7 @@ var styles = StyleSheet.create({
   wrapper: {
     marginTop: 20,
     width: width,
-    height: 420
+    height: 440
   },
   image: {
     flex: 1,
