@@ -1,4 +1,5 @@
 const CONFIGURATION = require('../common/Configuration');
+const globalState = require('../common/globalState');
 
 class ItemStore {
   constructor(view) {
@@ -32,6 +33,7 @@ class ItemStore {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
+        'X-AUTH-TOKEN': globalState.accessToken || '',
       }
     })
       .then((response) => response.json())
