@@ -7,12 +7,12 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "favourite-button@2x.png"
+      "filename" : "dislike-button@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "favourite-button@3x.png"
+      "filename" : "dislike-button@3x.png"
     }
   ],
   "info" : {

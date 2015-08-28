@@ -2,7 +2,8 @@
 
 var React = require('react-native');
 var FavouriteButton = require('./FavouriteButton');
-var SkipButton = require('./SkipButton');
+var LikeButton = require('./LikeButton');
+var DislikeButton = require('./DislikeButton');
 
 var {
   View,
@@ -13,8 +14,9 @@ var ItemActions = React.createClass({
   render: function() {
     return (
       <View style={styles.actions}>
+        <DislikeButton itemStore={this.props.itemStore}/>
         <FavouriteButton itemStore={this.props.itemStore}/>
-        <SkipButton itemStore={this.props.itemStore}/>
+        <LikeButton itemStore={this.props.itemStore}/>
       </View>
     );
   }
@@ -23,7 +25,8 @@ var ItemActions = React.createClass({
 var styles = StyleSheet.create({
   actions: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginTop: 10
   }
 });
 

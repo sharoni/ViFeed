@@ -8,7 +8,7 @@ var {
   StyleSheet
 } = React;
 
-var SkipButton = React.createClass({
+var DislikeButton = React.createClass({
   handleClick: function(event) {
     this.props.itemStore.nextItem();
   },
@@ -18,7 +18,7 @@ var SkipButton = React.createClass({
 
     return (
       <TouchableHighlight onPress={this.handleClick} underlayColor="#fff" style={styles.button}>
-        <Image source={require('image!skip-button')} />
+        <Image source={require('image!dislike-button')} style={styles.icon} />
       </TouchableHighlight>
     );
   }
@@ -27,8 +27,11 @@ var SkipButton = React.createClass({
 var styles = StyleSheet.create({
   button: {
     flex: 1,
-    marginHorizontal: 10
+    marginHorizontal: 5
+  },
+  icon: {
+    marginTop: 16
   }
 });
 
-module.exports = SkipButton;
+module.exports = DislikeButton;

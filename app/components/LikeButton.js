@@ -8,16 +8,17 @@ var {
   StyleSheet
 } = React;
 
-var FavouriteButton = React.createClass({
-
+var LikeButton = React.createClass({
   handleClick: function(event) {
     this.props.itemStore.nextItem();
   },
 
   render: function() {
+    var text = 'skip button';
+
     return (
       <TouchableHighlight onPress={this.handleClick} underlayColor="#fff" style={styles.button}>
-          <Image source={require('image!favourite-button')} />
+        <Image source={require('image!like-button')} style={styles.icon} />
       </TouchableHighlight>
     );
   }
@@ -26,8 +27,11 @@ var FavouriteButton = React.createClass({
 var styles = StyleSheet.create({
   button: {
     flex: 1,
-    marginHorizontal: 15
+    marginHorizontal: 5
+  },
+  icon: {
+    marginTop: 16
   }
 });
 
-module.exports = FavouriteButton;
+module.exports = LikeButton;
