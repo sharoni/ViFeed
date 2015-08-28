@@ -3,9 +3,9 @@
 var React = require('react-native');
 
 var {
-  Text,
   Image,
-  TouchableHighlight
+  TouchableHighlight,
+  StyleSheet
 } = React;
 
 var FavouriteButton = React.createClass({
@@ -15,13 +15,18 @@ var FavouriteButton = React.createClass({
   },
 
   render: function() {
-    var text = 'favourite button';
-
     return (
-      <TouchableHighlight onPress={this.handleClick}>
-          <Text>{text}</Text>
+      <TouchableHighlight onPress={this.handleClick} underlayColor="#fff" style={styles.button}>
+          <Image source={require('image!favourite-button')} />
       </TouchableHighlight>
     );
+  }
+});
+
+var styles = StyleSheet.create({
+  button: {
+    flex: 1,
+    marginHorizontal: 10
   }
 });
 
