@@ -50549,7 +50549,7 @@ Object.keys(componentOrElement));}
 
 module.exports = findDOMNode;
 });
-__d('ViFeed/app/components/LoginView.js',["react-native/Libraries/react-native/react-native.js","ViFeed/app/common/globalState.js","ViFeed/app/components/FacebookLogin.js"],function(global, require, requireDynamic, requireLazy, module, exports) {  'use strict';
+__d('ViFeed/app/components/LoginView.js',["image!vinter-logo-inverted","react-native/Libraries/react-native/react-native.js","ViFeed/app/common/globalState.js","ViFeed/app/components/FacebookLogin.js"],function(global, require, requireDynamic, requireLazy, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');
 var globalState=require('ViFeed/app/common/globalState.js');var 
@@ -50558,7 +50558,8 @@ var globalState=require('ViFeed/app/common/globalState.js');var
 Text=
 
 
-React.Text;var StyleSheet=React.StyleSheet;var View=React.View;
+
+React.Text;var StyleSheet=React.StyleSheet;var View=React.View;var Image=React.Image;
 
 var FacebookLogin=require('ViFeed/app/components/FacebookLogin.js');
 
@@ -50566,6 +50567,7 @@ var LoginView=React.createClass({displayName:'LoginView',
 render:function(){
 return (
 React.createElement(View, {style:styles.container}, 
+React.createElement(Image, {source:require('image!vinter-logo-inverted'), style:styles.logo}), 
 React.createElement(FacebookLogin, {onLoggedIn:this.onLoggedIn})));}, 
 
 
@@ -50584,8 +50586,10 @@ bottom:0,
 right:0, 
 left:0, 
 backgroundColor:'#44bcd2', 
-justifyContent:'center', 
-alignItems:'center'}});
+alignItems:'center'}, 
+
+logo:{
+marginTop:140}});
 
 
 
@@ -50601,7 +50605,7 @@ name:null}};
 
 module.exports = globalState;
 });
-__d('ViFeed/app/components/FacebookLogin.js',["ViFeed/app/components/VintedAPI.js","ViFeed/app/common/globalState.js","react-native/Libraries/react-native/react-native.js","react-native-fbsdklogin/FBSDKLogin.ios.js","react-native-fbsdkcore/FBSDKCore.ios.js"],function(global, require, requireDynamic, requireLazy, module, exports) {  'use strict';
+__d('ViFeed/app/components/FacebookLogin.js',["image!fingerprint","ViFeed/app/components/VintedAPI.js","ViFeed/app/common/globalState.js","react-native/Libraries/react-native/react-native.js","react-native-fbsdklogin/FBSDKLogin.ios.js","react-native-fbsdkcore/FBSDKCore.ios.js"],function(global, require, requireDynamic, requireLazy, module, exports) {  'use strict';
 
 var VintedAPI=require('ViFeed/app/components/VintedAPI.js');
 var globalState=require('ViFeed/app/common/globalState.js');
@@ -50611,7 +50615,8 @@ StyleSheet=
 
 
 
-React.StyleSheet;var View=React.View;var Text=React.Text;var TouchableHighlight=React.TouchableHighlight;
+
+React.StyleSheet;var View=React.View;var Text=React.Text;var TouchableHighlight=React.TouchableHighlight;var Image=React.Image;
 
 var FBSDKLogin=require('react-native-fbsdklogin/FBSDKLogin.ios.js');var 
 
@@ -50626,16 +50631,25 @@ FBSDKCore.FBSDKAccessToken;var FBSDKGraphRequest=FBSDKCore.FBSDKGraphRequest;
 var FacebookLogin=React.createClass({displayName:'FacebookLogin', 
 getInitialState:function(){
 return {
-loginText:'login', 
+loginText:'LOGIN', 
 apiToken:null, 
 appId:null};}, 
 
 
 
+getLoginButton:function(){
+return (
+React.createElement(View, {style:styles.button}, 
+React.createElement(Image, {source:require('image!fingerprint'), style:styles.loginIcon}), 
+React.createElement(Text, {style:styles.loginText}, this.state.loginText)));}, 
+
+
+
+
 render:function(){
 return (
-React.createElement(TouchableHighlight, {onPress:this.handleClick}, 
-React.createElement(Text, {style:styles.loginText}, this.state.loginText)));}, 
+React.createElement(TouchableHighlight, {onPress:this.handleClick, underlayColor:'#44bcd2'}, 
+this.getLoginButton()));}, 
 
 
 
@@ -50644,6 +50658,7 @@ handleClick:function(){
 if(this.state.loggedIn){
 this.logout();}else 
 {
+
 this.login();}}, 
 
 
@@ -50681,7 +50696,7 @@ if(error){
 alert('Error making request.');}else 
 {
 var name=result.name;
-_this2.setState({loginText:'logout (' + name + ')', loggedIn:true});}}, 
+_this2.setState({loginText:'Hi ' + name, loggedIn:true});}}, 
 
 '/me');
 
@@ -50691,10 +50706,15 @@ fetchPublicInfo.start();}});
 
 var styles=StyleSheet.create({
 loginText:{
-alignItems:'center', 
-justifyContent:'center', 
-flex:1, 
-color:'white'}});
+color:'#fff', 
+fontSize:16, 
+marginTop:12}, 
+
+loginIcon:{
+marginTop:280}, 
+
+button:{
+alignItems:'center'}});
 
 
 
@@ -50739,7 +50759,33 @@ var params='fb_access_token=' + accessToken + '&fb_app_id=' + appId + '&token=' 
 var url=CONFIGURATION.vintedRootUrl + '/api/1.2/facebook_login?' + params;
 console.log(url);
 request.open('GET', url, true);
-request.send();}}, {key:'fetchApiToken', value:
+request.send();}}, {key:'favouriteItem', value:
+
+
+function favouriteItem(itemId, callback){
+var request=new XMLHttpRequest();
+request.onreadystatechange = function(e){
+if(request.readyState !== 4){
+return;}
+
+if(request.status === 200){
+console.log('success', request.responseText);
+callback(true);}else 
+{
+callback(false);
+console.warn(request);}};
+
+
+var params={
+type:'item', 
+token:globalState.accessToken, 
+user_favourites:[itemId]};
+
+var url=CONFIGURATION.vintedRootUrl + '/api/v2/user_favourites/toggle';
+console.log(url);
+request.open('POST', url, true);
+request.setRequestHeader('Content-Type', 'application/json');
+request.send(JSON.stringify(params));}}, {key:'fetchApiToken', value:
 
 
 function fetchApiToken(callback){
@@ -51522,6 +51568,10 @@ throw new Error(
 
 module.exports = FBSDKGraphRequestManager;
 });
+__d('image!fingerprint',[],function(global, require, requireDynamic, requireLazy, module, exports) {  module.exports = {"__packager_asset":true,"isStatic":true,"path":"/Users/sharoni/Projects/React/ViFeed/iOS/Images.xcassets/fingerprint.imageset/fingerprint@3x.png","uri":"fingerprint","width":80,"height":80,"deprecated":true};
+});
+__d('image!vinter-logo-inverted',[],function(global, require, requireDynamic, requireLazy, module, exports) {  module.exports = {"__packager_asset":true,"isStatic":true,"path":"/Users/sharoni/Projects/React/ViFeed/iOS/Images.xcassets/vinter-logo-inverted.imageset/vinter-logo-inverted@3x.png","uri":"vinter-logo-inverted","width":240,"height":80,"deprecated":true};
+});
 __d('ViFeed/app/components/ItemView.js',["react-native/Libraries/react-native/react-native.js","ViFeed/app/stores/ItemStore.js","ViFeed/app/components/ItemTitle.js","ViFeed/app/components/ItemImage.js","ViFeed/app/components/ItemActions.js"],function(global, require, requireDynamic, requireLazy, module, exports) {  'use strict';
 
 var React=require('react-native/Libraries/react-native/react-native.js');var 
@@ -51566,7 +51616,7 @@ return (
 React.createElement(View, {style:styles.box}, 
 React.createElement(ItemImage, {source:imageUrl}), 
 React.createElement(ItemTitle, {title:itemTitle}), 
-React.createElement(ItemActions, {itemStore:this.store})));}});
+React.createElement(ItemActions, {itemStore:this.store, item:this.state.item})));}});
 
 
 
@@ -51623,7 +51673,9 @@ headers:{
 
 then(function(response){return response.json();}).
 then(function(responseData){
-item_dtos = responseData.feed_events.filter(function(item_dto){return item_dto.entity_type == 'item';});
+item_dtos = responseData.feed_events.filter(function(item_dto){
+return item_dto.entity_type == 'item' && item_dto.entity.photos[0];});
+
 last_item = item_dtos[item_dtos.length - 1];
 
 _this.state = {
@@ -51740,7 +51792,6 @@ alignItems:'center',
 justifyContent:'center'}, 
 
 wrapper:{
-marginTop:20, 
 width:width, 
 height:440}, 
 
@@ -51770,7 +51821,7 @@ render:function(){
 return (
 React.createElement(View, {style:styles.actions}, 
 React.createElement(DislikeButton, {itemStore:this.props.itemStore}), 
-React.createElement(FavouriteButton, {itemStore:this.props.itemStore}), 
+React.createElement(FavouriteButton, {itemStore:this.props.itemStore, item:this.props.item}), 
 React.createElement(LikeButton, {itemStore:this.props.itemStore})));}});
 
 
@@ -51786,9 +51837,10 @@ flexDirection:'row'}});
 
 module.exports = ItemActions;
 });
-__d('ViFeed/app/components/FavouriteButton.js',["image!favourite-button","react-native/Libraries/react-native/react-native.js"],function(global, require, requireDynamic, requireLazy, module, exports) {  'use strict';
+__d('ViFeed/app/components/FavouriteButton.js',["image!favourite-button","react-native/Libraries/react-native/react-native.js","ViFeed/app/components/VintedAPI.js"],function(global, require, requireDynamic, requireLazy, module, exports) {  'use strict';
 
-var React=require('react-native/Libraries/react-native/react-native.js');var 
+var React=require('react-native/Libraries/react-native/react-native.js');
+var VintedAPI=require('ViFeed/app/components/VintedAPI.js');var 
 
 
 Image=
@@ -51799,6 +51851,9 @@ React.Image;var TouchableHighlight=React.TouchableHighlight;var StyleSheet=React
 var FavouriteButton=React.createClass({displayName:'FavouriteButton', 
 
 handleClick:function(event){
+VintedAPI.favouriteItem(this.props.item.id, function(success){
+console.log('Item favourited successfully');});
+
 this.props.itemStore.nextItem();}, 
 
 

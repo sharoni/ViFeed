@@ -42,7 +42,6 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   wrapper: {
-    marginTop: 20,
     width: width,
     height: 440
   },
