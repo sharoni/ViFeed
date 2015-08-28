@@ -1,6 +1,5 @@
 'use strict';
 
-var Configuration = require('../common/Configuration')
 var VintedAPI = require('./VintedAPI')
 var React = require('react-native');
 var {

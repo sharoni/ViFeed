@@ -1,4 +1,4 @@
-const URL = 'https://vinted.com/';
+const CONFIGURATION = require('../common/Configuration');
 
 class ItemStore {
   constructor(view) {
@@ -60,9 +60,9 @@ class ItemStore {
     const {maxScore} = this.state;
 
     if (maxScore) {
-      return `${URL}?max_score=${maxScore}`;
+      return `${CONFIGURATION.vintedRootUrl}/?max_score=${maxScore}`;
     } else {
-      return `${URL}`;
+      return `${CONFIGURATION.vintedRootUrl}`;
     }
   }
 };
