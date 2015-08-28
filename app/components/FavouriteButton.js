@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var VintedAPI = require('./VintedAPI')
 
 var {
   Image,
@@ -11,6 +12,9 @@ var {
 var FavouriteButton = React.createClass({
 
   handleClick: function(event) {
+		VintedAPI.favouriteItem(this.props.item.id, (success) => {
+			console.log("Item favourited successfully");
+		});
     this.props.itemStore.nextItem();
   },
 

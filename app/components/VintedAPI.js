@@ -39,6 +39,32 @@ class VintedAPI
 		request.open('GET', url, true);
 		request.send();
 	}
+	
+	static favouriteItem(itemId, callback: (success: ?Object) => void) {
+		var request = new XMLHttpRequest();
+		request.onreadystatechange = (e) => {
+		  if (request.readyState !== 4) {
+		    return;
+		  }
+		  if (request.status === 200) {
+		    console.log('success', request.responseText);
+				callback(true);
+		  } else {
+				callback(false);
+		    console.warn(request);
+		  }
+		};
+		var params = {
+			type: 'item',
+			token: globalState.accessToken,
+			user_favourites: [itemId],
+		}
+		var url = `${CONFIGURATION.vintedRootUrl}/api/v2/user_favourites/toggle`;
+		console.log(url);
+		request.open('POST', url, true);
+		request.setRequestHeader('Content-Type', 'application/json');
+		request.send(JSON.stringify(params));
+	}
 
 	static fetchApiToken(callback: (error: ?Object, apiToken: ?Object) => void) {
 		var request = new XMLHttpRequest();

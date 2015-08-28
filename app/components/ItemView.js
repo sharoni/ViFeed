@@ -42,7 +42,7 @@ var ItemView = React.createClass({
       <View style={styles.box}>
         <ItemImage source={imageUrl}/>
         <ItemTitle title={itemTitle}/>
-        <ItemActions itemStore={this.store}/>
+        <ItemActions itemStore={this.store} item={this.state.item}/>
       </View>
     );
   }

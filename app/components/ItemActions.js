@@ -15,7 +15,7 @@ var ItemActions = React.createClass({
     return (
       <View style={styles.actions}>
         <DislikeButton itemStore={this.props.itemStore}/>
-        <FavouriteButton itemStore={this.props.itemStore}/>
+        <FavouriteButton itemStore={this.props.itemStore} item={this.props.item}/>
         <LikeButton itemStore={this.props.itemStore}/>
       </View>
     );
