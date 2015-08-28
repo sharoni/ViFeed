@@ -1,6 +1,7 @@
 'use strict';
 
 var VintedAPI = require('./VintedAPI')
+var globalState = require('../common/globalState')
 var React = require('react-native');
 var {
   StyleSheet,
@@ -55,7 +56,11 @@ var FacebookLogin = React.createClass({
 					this.fetchPublicInfo();
 					FBSDKAccessToken.getCurrentAccessToken((token) => {
 						this.setState({accessToken: token.tokenString, appId: token.appID});
-						VintedAPI.vintedLogin(token.tokenString, token.appID);
+						VintedAPI.vintedLogin(token.tokenString, token.appID, (success) => {
+							if (success) { 
+								this.props.onLoggedIn();
+							}
+						});
 					});
 		    }
 		  }

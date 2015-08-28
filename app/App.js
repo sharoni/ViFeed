@@ -7,18 +7,30 @@ var {
   View,
 } = React;
 
-var FacebookLogin = require('./components/FacebookLogin');
-var ItemView = require('./components/ItemView');
+var LoginView = require('./components/LoginView')
+var ItemView = require('./components/ItemView')
+var globalState = require('./common/globalState')
 
 var App = React.createClass({
   render: function() {
     return (
-      <View>
-        <ItemView/>
-        <FacebookLogin />
-      </View>
+			<View style={styles.container}>
+				{ globalState.loggedIn ? <ItemView /> : <LoginView onLoggedIn={this.onLoggedIn} /> }
+			</View>
     );
   },
+	
+	onLoggedIn: function() {
+		this.forceUpdate();
+	}
+});
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+  }
 });
 
 AppRegistry.registerComponent('ViFeed', () => App);
