@@ -25,8 +25,7 @@ var ItemActions = React.createClass({
 var styles = StyleSheet.create({
   actions: {
     flex: 1,
-    flexDirection: 'row',
-    marginTop: 10
+    flexDirection: 'row'
   }
 });
 
