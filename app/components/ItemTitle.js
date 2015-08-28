@@ -12,13 +12,14 @@ var ItemTitle = React.createClass({
     var title = this.props.title ? this.props.title : '';
 
     return (
-      <Text style={styles.title} numberOfLines={1}>{title}</Text>
+      <Text style={styles.title} numberOfLines={2}>{title}</Text>
     );
   }
 });
 
 var styles = StyleSheet.create({
   title: {
+    height: 60,
     fontSize: 20,
     textAlign: 'center',
     lineHeight: 30,
