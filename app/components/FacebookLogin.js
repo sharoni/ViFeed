@@ -22,12 +22,9 @@ var {
 var FacebookLogin = React.createClass({
   getInitialState: function() {
     return {
-      loggedIn: false,
 			loginText: 'login',
-			accessToken: null,
 			apiToken: null,
 			appId: null,
-			vintedAPI: new VintedAPI()
     };
   },
 
@@ -41,9 +38,9 @@ var FacebookLogin = React.createClass({
 
 	handleClick: function() {
 		if (this.state.loggedIn) {
-			this.logout()
+			this.logout();
 		} else {
-			this.login()
+			this.login();
 		}
 	},
 
@@ -55,10 +52,10 @@ var FacebookLogin = React.createClass({
 		    if (result.isCanceled) {
 		      alert('Login cancelled.');
 		    } else {
-					this.fetchPublicInfo()
+					this.fetchPublicInfo();
 					FBSDKAccessToken.getCurrentAccessToken((token) => {
 						this.setState({accessToken: token.tokenString, appId: token.appID});
-						this.state.vintedAPI.vintedLogin(token.tokenString, token.appID);
+						VintedAPI.vintedLogin(token.tokenString, token.appID);
 					});
 		    }
 		  }
@@ -75,7 +72,7 @@ var FacebookLogin = React.createClass({
 		  if (error) {
 		    alert('Error making request.');
 		  } else {
-				var name = result.name
+				var name = result.name;
 				this.setState({loginText: 'logout (' + name + ')', loggedIn: true});
 		  }
 		}, '/me');
