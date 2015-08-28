@@ -8,6 +8,7 @@ var {
   View,
 	Text,
 	TouchableHighlight,
+  Image
 } = React;
 
 var FBSDKLogin = require('react-native-fbsdklogin');
@@ -23,17 +24,26 @@ var {
 var FacebookLogin = React.createClass({
   getInitialState: function() {
     return {
-			loginText: 'login',
+			loginText: 'LOGIN',
 			apiToken: null,
 			appId: null,
     };
   },
 
+  getLoginButton: function() {
+    return (
+      <View style={styles.button}>
+        <Image source={require('image!fingerprint')} style={styles.loginIcon}/>
+        <Text style={styles.loginText}>{this.state.loginText}</Text>
+      </View>
+    )
+  },
+
   render: function() {
     return (
-			<TouchableHighlight onPress={this.handleClick}>
-        <Text style={styles.loginText}>{this.state.loginText}</Text>
-      </TouchableHighlight>
+  			<TouchableHighlight onPress={this.handleClick} underlayColor="#44bcd2">
+          {this.getLoginButton()}
+        </TouchableHighlight>
     );
   },
 
@@ -41,6 +51,7 @@ var FacebookLogin = React.createClass({
 		if (this.state.loggedIn) {
 			this.logout();
 		} else {
+      // this.props.onLoginStart();
 			this.login();
 		}
 	},
@@ -57,7 +68,7 @@ var FacebookLogin = React.createClass({
 					FBSDKAccessToken.getCurrentAccessToken((token) => {
 						this.setState({accessToken: token.tokenString, appId: token.appID});
 						VintedAPI.vintedLogin(token.tokenString, token.appID, (success) => {
-							if (success) { 
+							if (success) {
 								this.props.onLoggedIn();
 							}
 						});
@@ -78,7 +89,7 @@ var FacebookLogin = React.createClass({
 		    alert('Error making request.');
 		  } else {
 				var name = result.name;
-				this.setState({loginText: 'logout (' + name + ')', loggedIn: true});
+				this.setState({loginText: 'Hi ' + name, loggedIn: true});
 		  }
 		}, '/me');
 
@@ -88,12 +99,15 @@ var FacebookLogin = React.createClass({
 
 var styles = StyleSheet.create({
   loginText: {
-    alignItems: 'center',
-    justifyContent: 'center',
-		flex: 1,
-		color: 'red',
-		backgroundColor: 'green',
-		fontSize: 30,		
+		color: '#fff',
+		fontSize: 16,
+    marginTop: 12
+  },
+  loginIcon: {
+    marginTop: 280
+  },
+  button: {
+    alignItems: 'center'
   }
 });
 

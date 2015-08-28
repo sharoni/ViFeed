@@ -15,11 +15,11 @@ var App = React.createClass({
   render: function() {
     return (
 			<View style={styles.container}>
-				{ globalState.loggedIn ? <ItemView /> : <LoginView onLoggedIn={this.onLoggedIn} /> }
+				{globalState.loggedIn ? <ItemView /> : <LoginView onLoggedIn={this.onLoggedIn} /> }
 			</View>
     );
   },
-	
+
 	onLoggedIn: function() {
 		this.forceUpdate();
 	}
