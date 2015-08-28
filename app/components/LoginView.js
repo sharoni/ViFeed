@@ -6,7 +6,8 @@ var globalState = require('../common/globalState')
 var {
   Text,
   StyleSheet,
-  View
+  View,
+  Image
 } = React;
 
 var FacebookLogin = require('./FacebookLogin');
@@ -15,11 +16,12 @@ var LoginView = React.createClass({
   render: function() {
     return (
 			<View style={styles.container}>
+        <Image source={require('image!vinter-logo-inverted')} style={styles.logo} />
 				<FacebookLogin onLoggedIn={this.onLoggedIn} />
 			</View>
     );
   },
-	
+
 	onLoggedIn: function() {
 		this.props.onLoggedIn();
 	}
@@ -33,8 +35,10 @@ var styles = StyleSheet.create({
 		right: 0,
 		left: 0,
 		backgroundColor: '#44bcd2',
-		justifyContent: 'center',
     alignItems: 'center',
+  },
+  logo: {
+    marginTop: 140
   }
 });
 
