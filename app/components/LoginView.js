@@ -26,9 +26,15 @@ var LoginView = React.createClass({
 });
 
 var styles = StyleSheet.create({
-  button: {
-    flex: 1,
-    marginHorizontal: 10
+  container: {
+		position: 'absolute',
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		backgroundColor: '#44bcd2',
+		justifyContent: 'center',
+    alignItems: 'center',
   }
 });
 

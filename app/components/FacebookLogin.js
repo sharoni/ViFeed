@@ -32,7 +32,7 @@ var FacebookLogin = React.createClass({
   render: function() {
     return (
 			<TouchableHighlight onPress={this.handleClick}>
-        <Text>{this.state.loginText}</Text>
+        <Text style={styles.loginText}>{this.state.loginText}</Text>
       </TouchableHighlight>
     );
   },
@@ -87,10 +87,13 @@ var FacebookLogin = React.createClass({
 });
 
 var styles = StyleSheet.create({
-  facebook_login_button: {
+  loginText: {
     alignItems: 'center',
     justifyContent: 'center',
 		flex: 1,
+		color: 'red',
+		backgroundColor: 'green',
+		fontSize: 30,		
   }
 });
 
